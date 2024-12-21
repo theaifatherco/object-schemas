@@ -1,0 +1,80 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ticket_id",
+    "buy_date",
+    "rides"
+  ],
+  "properties": {
+    "ticket_id": {
+      "type": "string",
+      "description": "The ticket identifier (ID)."
+    },
+    "buy_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the ticket was bought at."
+    },
+    "rides": {
+      "type": "array",
+      "description": "The list of rides bought on this ticket.",
+      "default": [],
+      "items": {
+        "type": "object",
+        "description": "Entry representing one ride on the ticket. Each ride has an assigned departure place and time, arrival place and time, train identifiable information and, optionally (if assigned), reserved seats identification details.",
+        "additionalProperties": false,
+        "required": [
+          "departure_station",
+          "arrival_station",
+          "departure_datetime",
+          "arrival_datetime",
+          "train_id",
+          "coach_number",
+          "seat_numbers",
+          "price"
+        ],
+        "properties": {
+          "departure_station": {
+            "type": "string",
+            "description": "The departure station."
+          },
+          "arrival_station": {
+            "type": "string",
+            "description": "The arrival station."
+          },
+          "departure_datetime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The time and date at which the train leaves for this ride."
+          },
+          "arrival_datetime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The time and date at which the train arrives on the destination for this ride."
+          },
+          "train_id": {
+            "type": "string",
+            "description": "The train identifier (indicator) for this ride. It takes the form of \"[letters][some number]\". Examples: IR133, R4401, IC400, E14209"
+          },
+          "coach_number": {
+            "type": "string",
+            "description": "The coach (car) number which the seats are allocated to. If there is no number, it means it is not assigned a seat, so they might not be present."
+          },
+          "seat_numbers": {
+            "type": "array",
+            "description": "The list of seat numbers for the coach / car. If the seats are not reserved, they might not displayed.",
+            "default": [],
+            "items": {
+              "type": "number"
+            }
+          },
+          "price": {
+            "type": "number",
+            "description": "The price displayed for the ticket."
+          }
+        }
+      }
+    }
+  }
+}
